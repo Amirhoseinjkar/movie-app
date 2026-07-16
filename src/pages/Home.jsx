@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { getPopularMovies, searchMovies } from "./api";
-import SearchBar from "./SearchBar";
-import MovieCard from "./MovieCard";
-import Loader from "./Loader";
-
+import { getPopularMovies, searchMovies } from "../api";
+import MovieCard from "../components/MovieCard";
+import Loader from "../components/Loader";
+import Header from "../components/Header";
 
 function Home() {
   const [loading, setLoading] = useState(false);
@@ -49,7 +48,7 @@ function Home() {
   }
   return (
     <>
-      <SearchBar
+      <Header
         search={search}
         setSearch={setSearch}
         handleSearch={handleSearch}

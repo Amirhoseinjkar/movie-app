@@ -1,0 +1,82 @@
+.header {
+  min-height: 90px;
+
+  padding: 1rem 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+
+  flex-wrap: wrap;
+
+  background: rgba(15, 15, 20, 0.95);
+
+  backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  text-decoration: none;
+}
+
+.logo-section img {
+  width: 42px;
+  height: 42px;
+}
+
+.logo-section h1 {
+  color: white;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: #d0d0dc;
+
+  text-decoration: none;
+
+  font-size: 1rem;
+  font-weight: 500;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #7c5cff;
+
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 900px) {
+  
+  .header {
+    justify-content: center;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+  }
+}

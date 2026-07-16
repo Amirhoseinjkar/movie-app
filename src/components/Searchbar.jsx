@@ -20,6 +20,7 @@ function SearchBar({ search, setSearch, handleSearch }) {
       <button className="search-button" onClick={handleSearch}>
         Search
       </button>
+      
     </div>
   );
 }

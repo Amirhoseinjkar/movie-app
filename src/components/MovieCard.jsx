@@ -1,6 +1,6 @@
 import "./movieCard.css";
 import { Link } from "react-router-dom";
-import "./movieDetails.css";
+import "../pages/movieDetails.css";
 function MovieCard({ movies }) {
   return (
     <div className="movies-grid">
