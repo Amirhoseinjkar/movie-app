@@ -1,16 +1,18 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { options } from "../api";
 import Loader from "../components/Loader";
+import FavoriteContext from "../context/FavoritesContext";
+
+
 function MovieDetails() {
   const { id } = useParams();
 
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [favorites, setFavorites] = useState(() => {
-    const saved = localStorage.getItem("favorites");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const {favorites, setFavorites} = useContext(FavoriteContext)
+ 
+
 
   useEffect(() => {
     async function loadMovie() {
@@ -33,15 +35,15 @@ function MovieDetails() {
     loadMovie();
   }, [id]);
 
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+ 
 
   if (loading) {
     return <Loader />;
   }
+ 
 
   function addFavoriteBtn() {
+    
     if (
       favorites.some((favorite) => {
         return favorite.id === movie.id;
@@ -49,16 +51,24 @@ function MovieDetails() {
     ) {
       setFavorites(
         favorites.filter((favorite) => {
-          return favorite.id !== movie.id;
+          return(favorite.id !== movie.id
+          )
         }),
+
       );
+      
+      
     } else {
       setFavorites([...favorites, movie]);
+      
     }
   }
-
+const isAdded = favorites.some((favorite) => {
+  return favorite.id === movie.id;
+});
   return (
     <div className="movie-page">
+      
       <div
         className="hero"
         style={{
@@ -85,8 +95,10 @@ function MovieDetails() {
 
       <div className="details-container">
         <div className="buttons">
-          <button onClick={addFavoriteBtn}>+ Add to favorites</button>
-          {console.log(favorites)}
+          <button onClick={addFavoriteBtn}>
+            {isAdded ?'- remove from favorites'  :'+add to favorites'}
+          </button>
+          
         </div>
 
         <h2>Overview</h2>

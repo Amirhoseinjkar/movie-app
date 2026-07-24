@@ -1,5 +1,5 @@
 import "./Searchbar.css";
-function SearchBar({ search, setSearch, handleSearch }) {
+function SearchBar({ search, setSearch, handleSearch ,setSearched,setError}) {
   return (
     <div className="search-container">
       <input
@@ -8,7 +8,12 @@ function SearchBar({ search, setSearch, handleSearch }) {
         placeholder="search movies"
         value={search}
         onChange={(e) => {
-          setSearch(e.target.value);
+          const value = e.target.value
+          setSearch(value);
+          if (value.trim() === "") {
+    setSearched(false);
+    setError("");
+  }
         }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {

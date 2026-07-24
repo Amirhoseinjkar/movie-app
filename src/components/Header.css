@@ -4,6 +4,7 @@
   padding: 1rem 2rem;
 
   display: flex;
+ 
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
@@ -20,6 +21,11 @@
   top: 0;
   z-index: 100;
 }
+.header-text{
+  display: flex;
+  gap: 3rem;
+}
+
 
 .logo-section {
   display: flex;
@@ -73,10 +79,17 @@
   
   .header {
     justify-content: center;
+    position: relative;
+     flex-direction: column;
   }
 
   .nav-links {
     width: 100%;
     justify-content: center;
   }
+  .header-text{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 }

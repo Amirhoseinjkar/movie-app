@@ -1,13 +1,13 @@
 import "./movieCard.css";
 import { Link } from "react-router-dom";
 import "../pages/movieDetails.css";
-function MovieCard({ movies }) {
+function MovieCard({ movie}) {
   return (
-    <div className="movies-grid">
-      {movies.map((movie) => (
-        <Link className="movie-link" to={`/movie/${movie.id}`}>
-          <div className="movie-card" key={movie.id}>
-            <img
+    <>
+      {
+        <Link className="movie-link" draggable={false} key={movie.id} to={`/movie/${movie.id}`}>
+          <div className="movie-card" >
+            <img draggable='false'
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
             />
@@ -28,8 +28,8 @@ function MovieCard({ movies }) {
             </div>
           </div>
         </Link>
-      ))}
-    </div>
+      }
+    </>
   );
 }
 export default MovieCard;

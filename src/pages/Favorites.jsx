@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useContext} from "react";
 import MovieCard from "../components/MovieCard";
+import "./favorites.css"
+import { Link } from "react-router-dom";
+import FavoriteContext from "../context/FavoritesContext";
 
 function Favorites() {
-  const [favorites] = useState(() => {
-    const saved = localStorage.getItem("favorites");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const {favorites} = useContext(FavoriteContext)
   return (
     <>
-      <MovieCard movies={favorites} />
+    <p className="fav-num">favorites : {favorites.length}</p>
+      {favorites.length?<MovieCard movies={favorites} />:
+      <div className="empty-fav"><p>you havent added any movies yet</p> 
+      <Link to="/"><button > add movies</button></Link>
+      </div>
+       
+       }
     </>
   );
 }
