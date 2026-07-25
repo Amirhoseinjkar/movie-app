@@ -51,3 +51,23 @@ background: #7d5cff1f;
 .embla__slide {
   flex: 0 0 250px;
 }
+
+@media (max-width: 768px) {
+  .embla__slide {
+    flex: 0 0 180px;
+  }
+
+  .movie-card {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .embla__slide {
+    flex: 0 0 150px;
+  }
+
+  .movie-card {
+    width: 150px;
+  }
+}
