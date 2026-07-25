@@ -12,24 +12,27 @@ function MovieSection({ title, movies }) {
   }
 
   return (
-    <section>
-      <div className="section-header">
-        <button onClick={scrollLeft}>◀</button>
+   <section>
+  <div className="section-header">
+    <h2>{title}</h2>
+  </div>
 
-        <h2>{title}</h2>
+  <div className="slider-wrapper">
+    <button onClick={scrollLeft} className="sliderBtn">{"<"}</button>
 
-        <button onClick={scrollRight}>▶</button>
+    <div className="embla" ref={emblaRef}>
+      <div className="embla__container">
+        {movies.map((movie) => (
+          <div className="embla__slide" key={movie.id}>
+            <MovieCard movie={movie} />
+          </div>
+        ))}
       </div>
-      <div className="embla" ref={emblaRef}>
-        <div className="embla__container">
-          {movies.map((movie) => (
-            <div className="embla__slide" key={movie.id}>
-              <MovieCard movie={movie} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    </div>
+
+    <button onClick={scrollRight} className="sliderBtn">{">"}</button>
+  </div>
+</section>
   );
 }
 export default MovieSection;

@@ -6,8 +6,10 @@ import {
   getNowPlayingMovies,
   searchMovies,
 } from "../api";
+import SkeletonCard from "../components/SkeletonCard";
 
-import Loader from "../components/Loader";
+
+
 import Header from "../components/Header";
 import "./home.css";
 import MovieSection from "../components/MovieSection";
@@ -66,13 +68,31 @@ function Home() {
       setLoading(false);
     }
   }
+  
   if (loading) {
-    return <Loader />;
+    return(
+      <>
+     <Header
+        search={search}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
+        setSearched ={setSearched}
+         setError={setError}
+      />
+         <div className="embla__container">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <div className="embla__slide" key={index}>
+            <SkeletonCard />
+          </div>
+        ))}
+      </div>
+      </>
+    )
   }
 
   return (
     <>
-      <Header
+       <Header
         search={search}
         setSearch={setSearch}
         handleSearch={handleSearch}
