@@ -3,12 +3,15 @@ import { useEffect, useState, useContext } from "react";
 import { options } from "../api";
 import Loader from "../components/Loader";
 import FavoriteContext from "../context/FavoritesContext";
+import useEmblaCarousel from "embla-carousel-react";
+import unknownActor from "../assets/unknown-actor.png";
 
 
 function MovieDetails() {
   const { id } = useParams();
-
+  const [emblaRef] = useEmblaCarousel();
   const [movie, setMovie] = useState(null);
+  const [cast,setCast]=useState([])
   const [loading, setLoading] = useState(true);
   const {favorites, setFavorites} = useContext(FavoriteContext)
  
@@ -25,6 +28,12 @@ function MovieDetails() {
         const data = await response.json();
 
         setMovie(data);
+        const creditsResponse = await fetch(
+          `https://api.themoviedb.org/3/movie/${id}/credits`,
+  options
+        )
+        const creditsData = await creditsResponse.json()
+        setCast(creditsData.cast)
       } catch (error) {
         console.error("Error fetching movie:", error);
       } finally {
@@ -110,6 +119,29 @@ const isAdded = favorites.some((favorite) => {
             <span key={genre.id}>{genre.name}</span>
           ))}
         </div>
+        <h2>
+          cast
+        </h2>
+    <div className="cast-embla" ref={emblaRef}>
+  <div className="cast-container">
+    {cast.slice(0, 10).map((actor) => (
+      <div className="cast-slide" key={actor.id}>
+        <div className="actor-card">
+          {actor.profile_path?<img
+            src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
+            alt={actor.name}
+          /> : <img src={unknownActor} />
+          }
+          
+
+          <h4>{actor.name}</h4>
+
+          <p>{actor.character}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
       </div>
     </div>
   );

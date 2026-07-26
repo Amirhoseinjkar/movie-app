@@ -110,6 +110,7 @@ body {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
 .genres span {
@@ -119,4 +120,34 @@ body {
 
   border-radius: 999px;
   border: 1px solid rgb(60, 21, 199);
+}
+.cast-embla {
+  overflow: hidden;
+  margin-top: 2rem;
+
+}
+
+.cast-container {
+  display: flex;
+  
+}
+
+.cast-slide {
+  flex: 0 0 120px;
+
+}
+.actor-card{
+  text-align: center;
+}
+.actor-card img{
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
+.actor-card h4{
+  font-size: 15px;
+}
+.actor-card p{
+  font-size: 12px;
 }
