@@ -16,6 +16,7 @@ function Header({ search, setSearch, handleSearch ,setSearched,setError}) {
       <nav className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/favorites">Favorites</Link>
+        <Link to='/watched'>watched</Link>
       </nav>
       </div>
         <SearchBar

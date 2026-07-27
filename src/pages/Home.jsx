@@ -8,8 +8,6 @@ import {
 } from "../api";
 import SkeletonCard from "../components/SkeletonCard";
 
-
-
 import Header from "../components/Header";
 import "./home.css";
 import MovieSection from "../components/MovieSection";
@@ -47,12 +45,12 @@ function Home() {
     }
     loadMovies();
   }, []);
- 
+
   async function handleSearch() {
     if (search.trim() === "") {
       return;
     }
-    setSearched(true)
+    setSearched(true);
     setLoading(true);
     setError("");
 
@@ -68,54 +66,51 @@ function Home() {
       setLoading(false);
     }
   }
-  
+
   if (loading) {
-    return(
+    return (
       <>
-     <Header
-        search={search}
-        setSearch={setSearch}
-        handleSearch={handleSearch}
-        setSearched ={setSearched}
-         setError={setError}
-      />
-         <div className="embla__container">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <div className="embla__slide" key={index}>
-            <SkeletonCard />
-          </div>
-        ))}
-      </div>
+        <Header
+          search={search}
+          setSearch={setSearch}
+          handleSearch={handleSearch}
+          setSearched={setSearched}
+          setError={setError}
+        />
+        <div className="embla__container">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <div className="embla__slide" key={index}>
+              <SkeletonCard />
+            </div>
+          ))}
+        </div>
       </>
-    )
+    );
   }
 
   return (
     <>
-       <Header
+      <Header
         search={search}
         setSearch={setSearch}
         handleSearch={handleSearch}
-        setSearched ={setSearched}
-         setError={setError}
+        setSearched={setSearched}
+        setError={setError}
       />
       {error && <p>{error}</p>}
-      {!searched? (
+      {!searched ? (
         <>
           <MovieSection title="Popular" movies={popularMovies} />
 
-      <MovieSection title="Top Rated" movies={topRatedMovies} />
+          <MovieSection title="Top Rated" movies={topRatedMovies} />
 
-      <MovieSection title="Upcoming" movies={upcomingMovies} />
+          <MovieSection title="Upcoming" movies={upcomingMovies} />
 
-      <MovieSection title="Now Playing" movies={nowPlayingMovies} />
+          <MovieSection title="Now Playing" movies={nowPlayingMovies} />
         </>
       ) : (
         <MovieSection title="search results" movies={movies} />
-      )
-
-    }
-    
+      )}
     </>
   );
 }

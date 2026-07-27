@@ -5,6 +5,7 @@ import Loader from "../components/Loader";
 import FavoriteContext from "../context/FavoritesContext";
 import useEmblaCarousel from "embla-carousel-react";
 import unknownActor from "../assets/unknown-actor.png";
+import WatchedContext from "../context/WatchedContext";
 
 
 function MovieDetails() {
@@ -14,6 +15,7 @@ function MovieDetails() {
   const [cast,setCast]=useState([])
   const [loading, setLoading] = useState(true);
   const {favorites, setFavorites} = useContext(FavoriteContext)
+  const {watched,setWatched} = useContext(WatchedContext)
  
 
 
@@ -72,9 +74,26 @@ function MovieDetails() {
       
     }
   }
+  function addWatchedBtn(){
+    if(watched.some((watch)=>{
+      return(
+        watch.id === movie.id
+      )
+    })
+  ){
+setWatched(watched.filter((watch)=>{
+  return(watch.id !== movie.id)
+}))
+    } else{
+      setWatched([...watched,movie])
+    }
+  }
 const isAdded = favorites.some((favorite) => {
   return favorite.id === movie.id;
 });
+const isWatched = watched.some((watch)=>{
+  return watch.id === movie.id
+})
   return (
     <div className="movie-page">
       
@@ -107,6 +126,7 @@ const isAdded = favorites.some((favorite) => {
           <button onClick={addFavoriteBtn}>
             {isAdded ?'- remove from favorites'  :'+add to favorites'}
           </button>
+          <button onClick={addWatchedBtn}>{isWatched?'- remove from watched' : 'add to watched'}</button>
           
         </div>
 
