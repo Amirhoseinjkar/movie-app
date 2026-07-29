@@ -30,7 +30,14 @@ export async function getNowPlayingMovies(){
 }
 
 export async function searchMovies(query){
-  const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}`, options)
+  const response = await fetch(`https://api.themoviedb.org/3/search/multi?query=${query}`, options)
   const data = await response.json()
-  return data.results;
+ 
+  return data.results.filter((item)=> item.media_type === "movie" || item.media_type === "tv");
+}
+export async function getPopularTv(){
+  const response =  await fetch('https://api.themoviedb.org/3/tv/popular',options)
+  const data = await response.json()
+  console.log(data);
+  return data.results
 }

@@ -7,7 +7,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import unknownActor from "../assets/unknown-actor.png";
 import WatchedContext from "../context/WatchedContext";
 
-function MovieDetails() {
+function TvDetails() {
   const { id } = useParams();
   const [emblaRef] = useEmblaCarousel();
   const [movie, setMovie] = useState(null);
@@ -20,7 +20,7 @@ function MovieDetails() {
     async function loadMovie() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}`,
+          `https://api.themoviedb.org/3/tv/${id}`,
           options,
         );
 
@@ -28,7 +28,7 @@ function MovieDetails() {
 
         setMovie(data);
         const creditsResponse = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}/credits`,
+          `https://api.themoviedb.org/3/tv/${id}/credits`,
           options,
         );
         const creditsData = await creditsResponse.json();
@@ -93,14 +93,13 @@ function MovieDetails() {
       >
         <div className="overlay">
           <div className="hero-content">
-            <h1>{movie.title}</h1>
+            <h1>{movie.name}</h1>
 
             <div className="movie-meta">
               <span>⭐ {movie.vote_average.toFixed(1)}</span>
 
-              <span>{movie.release_date.slice(0, 4)}</span>
+              <span>{movie.first_air_date.slice(0, 4)}</span>
 
-              <span>{movie.runtime} min</span>
               <span>{movie.adult ? <p>+18</p> : <p>pg-13</p>}</span>
             </div>
 
@@ -111,10 +110,16 @@ function MovieDetails() {
 
       <div className="details-container">
         <div className="buttons">
-          <button className={`watchlist-btn ${isAdded? "active": ""}` }onClick={addFavoriteBtn}>
+          <button
+            className={`watchlist-btn ${isAdded ? "active" : ""}`}
+            onClick={addFavoriteBtn}
+          >
             {isAdded ? "✓ In Watchlist" : "+ Add to Watchlist"}
           </button>
-          <button  className={`watched-btn ${isWatched ? "active" : ""}`} onClick={addWatchedBtn}>
+          <button
+            className={`watched-btn ${isWatched ? "active" : ""}`}
+            onClick={addWatchedBtn}
+          >
             {isWatched ? "✓ Watched" : "Mark as Watched"}
           </button>
         </div>
@@ -162,4 +167,4 @@ function MovieDetails() {
   );
 }
 
-export default MovieDetails;
+export default TvDetails;

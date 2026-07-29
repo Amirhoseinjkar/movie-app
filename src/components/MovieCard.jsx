@@ -2,13 +2,15 @@ import "./movieCard.css";
 import { Link } from "react-router-dom";
 import "../pages/movieDetails.css";
 function MovieCard({ movie }) {
+  const type = movie.media_type || (movie.name ? "tv" : "movie");
+  
   return (
     <>
       {
          <Link
     className="movie-link"
     draggable={false}
-    to={`/movie/${movie.id}`}
+    to={`/${type}/${movie.id}`}
   >
     <div className="movie-card">
       <img
@@ -18,7 +20,7 @@ function MovieCard({ movie }) {
       />
 
       <div className="movie-info">
-        <h3 className="movie-title">{movie.title}</h3>
+        <h3 className="movie-title">{movie.title || movie.name}</h3>
 
         <div className="movie-footer">
           <span className="movie-rating">
@@ -27,7 +29,7 @@ function MovieCard({ movie }) {
           </span>
 
           <span className="movie-year">
-            {movie.release_date?.slice(0, 4)}
+            {(movie.release_date || movie.first_air_date)?.slice(0, 4)}
           </span>
         </div>
       </div>

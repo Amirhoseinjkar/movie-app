@@ -5,9 +5,10 @@ import {
   getUpcomingMovies,
   getNowPlayingMovies,
   searchMovies,
+  getPopularTv,
 } from "../api";
 import SkeletonCard from "../components/SkeletonCard";
-
+import MovieGrid from "../components/MovieGrid";
 import Header from "../components/Header";
 import "./home.css";
 import MovieSection from "../components/MovieSection";
@@ -19,7 +20,7 @@ function Home() {
   const [searched, setSearched] = useState(false);
   const [error, setError] = useState("");
   const [popularMovies, setPopularMovies] = useState([]);
-
+  const[popularTv,setPopularTv] = useState([])
   const [topRatedMovies, setTopRatedMovies] = useState([]);
 
   const [upcomingMovies, setUpcomingMovies] = useState([]);
@@ -37,6 +38,8 @@ function Home() {
         setNowPlayingMovies(nowPlaying);
         const upcoming = await getUpcomingMovies();
         setUpcomingMovies(upcoming);
+        const popularTv = await getPopularTv()
+        setPopularTv(popularTv)
       } catch (error) {
         console.error("Error fetching  movies", error);
       } finally {
@@ -101,6 +104,8 @@ function Home() {
       {!searched ? (
         <>
           <MovieSection title="Popular" movies={popularMovies} />
+          <MovieSection title='popularTv'
+          movies={popularTv} />
 
           <MovieSection title="Top Rated" movies={topRatedMovies} />
 
@@ -109,7 +114,7 @@ function Home() {
           <MovieSection title="Now Playing" movies={nowPlayingMovies} />
         </>
       ) : (
-        <MovieSection title="search results" movies={movies} />
+       <MovieGrid movies={movies} />
       )}
     </>
   );

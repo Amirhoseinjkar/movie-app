@@ -4,12 +4,14 @@ import "./app.css";
 import MovieDetails from "./pages/MovieDetails.jsx";
 import Favorites from "./pages/Favorites.jsx";
 import WatchedMovies from './pages/WatchedMovies.jsx'
+import TvDetails from "./pages/TvDetails.jsx";
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
+        <Route path="/tv/:id" element={<TvDetails />} />
         <Route path="favorites" element={<Favorites />} />
         <Route path='watched' element ={<WatchedMovies />} />
       </Routes>

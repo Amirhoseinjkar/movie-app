@@ -1,4 +1,5 @@
 import "./Searchbar.css";
+import {FiSearch} from "react-icons/fi"
 function SearchBar({ search, setSearch, handleSearch ,setSearched,setError}) {
   return (
     <div className="search-container">
@@ -23,7 +24,8 @@ function SearchBar({ search, setSearch, handleSearch ,setSearched,setError}) {
       />
      
       <button className="search-button" onClick={handleSearch}>
-        Search
+        <FiSearch className="search-icon" />
+       <span>search</span>
       </button>
       
     </div>

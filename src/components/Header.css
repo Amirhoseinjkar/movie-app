@@ -82,11 +82,30 @@
     position: relative;
      flex-direction: column;
   }
+ 
+
+.nav-links a {
+  font-size: 0.9rem;
+ 
+}
 
   .nav-links {
     width: 100%;
     justify-content: center;
+    gap: 1rem;
   }
+  .logo-section img {
+  width: 35px;
+  height: 35px;
+}
+
+.logo-section h1 {
+
+
+  font-size: 1rem;
+ 
+}
+
   .header-text{
   width: 100%;
   display: flex;
