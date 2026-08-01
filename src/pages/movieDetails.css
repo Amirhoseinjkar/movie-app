@@ -2,7 +2,17 @@ body {
   background: #0d0d12;
   color: white;
 }
-
+.back-btn {
+  width: 3rem;
+  color: white;
+  background: #a651c791;
+  border: none;
+  border-radius: 2px;
+  height: 1.5rem;
+  font-size: 1.5rem;
+  position: absolute;
+  z-index:1
+}
 .movie-page {
   min-height: 100vh;
 }
@@ -307,6 +317,257 @@ body {
 
   line-height: 1.3;
 }
+/* episodes */
+.seasons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.season-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.season-card:hover {
+  border-color: rgba(124, 92, 255, 0.4);
+}
+
+/* Season header */
+
+.brief-season {
+  min-height: 75px;
+  padding: 1rem 1.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+}
+
+.season-info h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+  color: white;
+}
+
+.season-info span {
+  font-size: 0.8rem;
+  color: #92929f;
+}
+
+/* Watched circle */
+
+.watched-indicator {
+  width: 28px;
+  height: 28px;
+
+  border-radius: 50%;
+
+  border: 2px solid #555563;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  flex-shrink: 0;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s ease;
+}
+
+.watched-indicator.watched {
+  background: #22c55e;
+  border-color: #22c55e;
+
+  transform: scale(1.05);
+}
+
+/* Episodes */
+
+.episodes-container {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Episode card */
+
+.episode {
+  display: flex;
+  gap: 1.2rem;
+
+  padding: 1.2rem 1.5rem;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  transition: background 0.2s ease;
+}
+
+.episode:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Episode poster */
+
+.episode-poster {
+  width: 180px;
+  height: 105px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+  border-radius: 10px;
+
+  background: #1b1b24;
+}
+
+.episode-poster img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: 0.75;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.3s ease;
+}
+
+.episode:hover .episode-poster img {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+/* No image */
+
+.no-episode-image {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #777784;
+  font-size: 0.75rem;
+}
+
+/* Information */
+
+.episode-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.episode-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 1rem;
+}
+
+.episode-number {
+  color: #7c5cff;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.episode-info h4 {
+  margin: 0.25rem 0 0;
+
+  color: white;
+
+  font-size: 1rem;
+}
+
+/* Meta */
+
+.episode-meta {
+  display: flex;
+  gap: 1rem;
+
+  margin-top: 0.5rem;
+
+  color: #888894;
+
+  font-size: 0.75rem;
+}
+
+/* Overview */
+
+.episode-overview {
+  margin: 0.7rem 0 0;
+
+  color: #a9a9b5;
+
+  font-size: 0.8rem;
+  line-height: 1.5;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+/* Watched circle */
+
+.episode-watched {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  border: 2px solid #555563;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: transparent;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.episode-watched:hover {
+  border-color: #22c55e;
+
+  transform: scale(1.08);
+}
+
+/* Later, when watched */
+
+.episode-watched.watched {
+  background: #22c55e;
+  border-color: #22c55e;
+
+  color: white;
+}
+
 
 @media (max-width: 600px) {
   .buttons {
@@ -316,6 +577,37 @@ body {
   .buttons button {
     width: 100%;
     min-width: unset;
+  }
+    .brief-season {
+    min-height: 65px;
+    padding: 0.9rem;
+  }
+
+   .episode {
+    gap: 0.8rem;
+    padding: 1rem;
+  }
+
+  .episode-poster {
+    width: 120px;
+    height: 75px;
+  }
+
+  .episode-info h4 {
+    font-size: 0.85rem;
+  }
+
+  .episode-overview {
+    display: none;
+  }
+
+  .episode-meta {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .season-info h3 {
+    font-size: 0.95rem;
   }
 }
 @media (max-width: 768px) {

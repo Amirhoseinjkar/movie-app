@@ -15,7 +15,20 @@ function TvDetails() {
   const [loading, setLoading] = useState(true);
   const { favorites, setFavorites } = useContext(FavoriteContext);
   const { watched, setWatched } = useContext(WatchedContext);
+  const [seasons, setSeasons] = useState([]);
+   const [expandedId, setExpandedId] = useState(null);
+   const [watchedEpisodes, setWatchedEpisodes] = useState(() => {
+  const saved = localStorage.getItem("watchedEpisodes");
 
+  return saved ? JSON.parse(saved) : [];
+});
+
+useEffect(() => {
+  localStorage.setItem(
+    "watchedEpisodes",
+    JSON.stringify(watchedEpisodes)
+  );
+}, [watchedEpisodes]);
   useEffect(() => {
     async function loadMovie() {
       try {
@@ -33,6 +46,19 @@ function TvDetails() {
         );
         const creditsData = await creditsResponse.json();
         setCast(creditsData.cast);
+
+        const seasonsData = await Promise.all(
+          data.seasons.map(async (season) => {
+            const response = await fetch(
+              `https://api.themoviedb.org/3/tv/${id}/season/${season.season_number}`,
+              options,
+            );
+            return response.json();
+          }),
+        );
+        console.log(seasonsData);
+        setSeasons(seasonsData);
+        
       } catch (error) {
         console.error("Error fetching movie:", error);
       } finally {
@@ -77,6 +103,34 @@ function TvDetails() {
       setWatched([...watched, movie]);
     }
   }
+  function handleEpisodeWatched(episodeId){
+   if(watchedEpisodes.includes(episodeId)){
+    setWatchedEpisodes(
+      watchedEpisodes.filter((id)=> id!== episodeId)
+    )
+   } else{
+    setWatchedEpisodes([...watchedEpisodes, episodeId])
+   }
+
+  }
+  function handleSeasonWatched(season) {
+  const episodeIds = season.episodes.map((episode) => episode.id);
+
+  const allWatched = episodeIds.every((id) =>
+    watchedEpisodes.includes(id)
+  );
+
+  if (allWatched) {
+    setWatchedEpisodes(
+      watchedEpisodes.filter((id) => !episodeIds.includes(id))
+    );
+  } else {
+    setWatchedEpisodes([
+      ...watchedEpisodes,
+      ...episodeIds.filter((id) => !watchedEpisodes.includes(id)),
+    ]);
+  }
+}
   const isAdded = favorites.some((favorite) => {
     return favorite.id === movie.id;
   });
@@ -133,6 +187,107 @@ function TvDetails() {
             <span key={genre.id}>{genre.name}</span>
           ))}
         </div>
+        <div className="seasons-container">
+  {seasons.map((season) => {
+    const isExpanded = expandedId === season.id;
+
+   const isSeasonWatched = season.episodes.every((episode) =>
+      watchedEpisodes.includes(episode.id)
+    );
+
+
+    return (
+      <div className="season-card" key={season.id}>
+        <div
+          className="brief-season"
+          onClick={() =>
+            setExpandedId(isExpanded ? null : season.id)
+          }
+        >
+          <div className="season-info">
+            <h3>{season.name}</h3>
+            <span>{season.episodes.length} episodes</span>
+          </div>
+
+            <div
+            className={`watched-indicator ${
+              isSeasonWatched ? "watched" : ""
+            }`}
+            onClick={() => handleSeasonWatched(season)}
+          >
+            {isSeasonWatched ? "✓" : ""}
+          </div>
+        </div>
+
+        {isExpanded && (
+          <div className="episodes-container">
+  {season.episodes.map((episode) => {
+     const isEpisodeWatched = watchedEpisodes.includes(
+                episode.id
+              );
+              return(
+    <div className="episode" key={episode.id}>
+
+      <div className="episode-poster">
+        {episode.still_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w300${episode.still_path}`}
+            alt={episode.name}
+          />
+        ) : (
+          <div className="no-episode-image">
+            No image
+          </div>
+        )}
+      </div>
+
+      <div className="episode-info">
+        <div className="episode-header">
+          <div>
+            <span className="episode-number">
+              Episode {episode.episode_number}
+            </span>
+
+            <h4>{episode.name}</h4>
+          </div>
+
+              <div
+                        className={`watched-indicator ${
+                          isEpisodeWatched ? "watched" : ""
+                        }`}
+                        onClick={() =>
+                          handleEpisodeWatched(episode.id)
+                        }
+                      >
+                        {isEpisodeWatched ? "✓" : ""}
+                      </div>
+        </div>
+
+        <div className="episode-meta">
+          {episode.air_date && (
+            <span>{episode.air_date}</span>
+          )}
+
+          {episode.runtime && (
+            <span>{episode.runtime} min</span>
+          )}
+        </div>
+
+        {episode.overview && (
+          <p className="episode-overview">
+            {episode.overview}
+          </p>
+        )}
+      </div>
+
+    </div>
+  )})}
+</div>
+        )}
+      </div>
+    );
+  })}
+</div>
         <h2>cast</h2>
         <div className="cast-embla" ref={emblaRef}>
           <div className="cast-container">

@@ -6,6 +6,8 @@ import FavoriteContext from "../context/FavoritesContext";
 import useEmblaCarousel from "embla-carousel-react";
 import unknownActor from "../assets/unknown-actor.png";
 import WatchedContext from "../context/WatchedContext";
+import toast from "react-hot-toast";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 function MovieDetails() {
   const { id } = useParams();
@@ -53,12 +55,14 @@ function MovieDetails() {
         return favorite.id === movie.id;
       })
     ) {
+      toast.error("Removed from Watchlist");
       setFavorites(
         favorites.filter((favorite) => {
           return favorite.id !== movie.id;
         }),
       );
     } else {
+      toast.success("Added to Watchlist");
       setFavorites([...favorites, movie]);
     }
   }
@@ -68,6 +72,7 @@ function MovieDetails() {
         return watch.id === movie.id;
       })
     ) {
+      toast.error("removed from watched list");
       setWatched(
         watched.filter((watch) => {
           return watch.id !== movie.id;
@@ -75,6 +80,7 @@ function MovieDetails() {
       );
     } else {
       setWatched([...watched, movie]);
+      toast.success("Added to Watched movies");
     }
   }
   const isAdded = favorites.some((favorite) => {
@@ -85,6 +91,9 @@ function MovieDetails() {
   });
   return (
     <div className="movie-page">
+      <button className="back-btn" onClick={() => window.history.back()}>
+      <IoIosArrowRoundBack />
+      </button>
       <div
         className="hero"
         style={{
