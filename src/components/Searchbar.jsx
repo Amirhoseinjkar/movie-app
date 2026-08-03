@@ -1,4 +1,4 @@
-import "./Searchbar.css";
+import "./searchbar.css";
 import {FiSearch} from "react-icons/fi"
 function SearchBar({ search, setSearch, handleSearch ,setSearched,setError}) {
   return (
