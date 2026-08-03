@@ -19,9 +19,10 @@ body {
   margin: 0 auto;
   padding: 2rem;
 }
+/* phone*/
 @media (max-width: 600px) {
-  .home {
-    padding: 0;
+  body {
+    padding:1rem 0;
     margin: 0;
   }
 }
