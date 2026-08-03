@@ -1,6 +1,7 @@
 import "./movieCard.css";
 import { Link } from "react-router-dom";
 import "../pages/movieDetails.css";
+import star from "../assets/star.png";
 function MovieCard({ movie }) {
   const type = movie.media_type || (movie.name ? "tv" : "movie");
   
@@ -24,7 +25,7 @@ function MovieCard({ movie }) {
 
         <div className="movie-footer">
           <span className="movie-rating">
-            <img src="src/assets/star.png" alt="Star" />
+            <img src={star} alt="Star" />
             {movie.vote_average.toFixed(1)}
           </span>
 
