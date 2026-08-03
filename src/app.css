@@ -19,4 +19,10 @@ body {
   margin: 0 auto;
   padding: 2rem;
 }
+@media (max-width: 600px) {
+  .home {
+    padding: 0;
+    margin: 0;
+  }
+}
 
