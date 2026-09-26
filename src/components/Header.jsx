@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./Searchbar.jsx";
 import download from "../assets/download.svg";
+
 import "./Header.css";
 function Header({ search, setSearch, handleSearch ,setSearched,setError}) {
+ 
   return (
-    <header className="header">
+    <header className={'header'}>
       <div className="header-text">
       <Link className="logo-section" to="/">
         <img src={download} alt="logo" />
