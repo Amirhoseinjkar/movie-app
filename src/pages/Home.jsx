@@ -12,6 +12,7 @@ import MovieGrid from "../components/MovieGrid";
 import Header from "../components/Header";
 import "./home.css";
 import MovieSection from "../components/MovieSection";
+import HomeHero from "../components/HomeHero";
 
 function Home() {
   const [loading, setLoading] = useState(false);
@@ -100,6 +101,7 @@ function Home() {
         setSearched={setSearched}
         setError={setError}
       />
+      <HomeHero />
       {error && <p>{error}</p>}
       {!searched ? (
         <>
