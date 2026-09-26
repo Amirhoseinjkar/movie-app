@@ -7,6 +7,7 @@
     isolation: isolate;
 }
 
+
 /* =========================
    Character backgrounds
    ========================= */
@@ -16,8 +17,11 @@
     top: 0;
     width: 100%;
     height: 100%;
+
     opacity: 0;
+
     transition: opacity 0.6s ease;
+
     z-index: 1;
 }
 
@@ -25,38 +29,81 @@
     opacity: 1;
 }
 
-/* Stronger, more saturated colors */
 
 .spiderman-bg {
     background:
-        radial-gradient(circle at 70% 30%, #ff3030 0%, transparent 35%),
-        linear-gradient(135deg, #b30000 0%, #430000 55%, #090000 100%);
+        radial-gradient(
+            circle at 70% 30%,
+            #ff3030 0%,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #b30000 0%,
+            #430000 55%,
+            #090000 100%
+        );
 }
+
 
 .batman-bg {
     background:
-        radial-gradient(circle at 75% 25%, #374151 0%, transparent 28%),
-        linear-gradient(135deg, #252a35 0%, #090b10 55%, #000000 100%);
+        radial-gradient(
+            circle at 75% 25%,
+            #374151 0%,
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #252a35 0%,
+            #090b10 55%,
+            #000000 100%
+        );
 }
+
 
 .halk-bg {
     background:
-        radial-gradient(circle at 70% 30%, #22c55e 0%, transparent 30%),
-        linear-gradient(135deg, #15803d 0%, #064e1d 50%, #020b05 100%);
+        radial-gradient(
+            circle at 70% 30%,
+            #22c55e 0%,
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #15803d 0%,
+            #064e1d 50%,
+            #020b05 100%
+        );
 }
+
 
 .thor-bg {
     background:
-        radial-gradient(circle at 70% 25%, #60a5fa 0%, transparent 30%),
-        linear-gradient(135deg, #2563eb 0%, #172554 50%, #020617 100%);
+        radial-gradient(
+            circle at 70% 25%,
+            #60a5fa 0%,
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #2563eb 0%,
+            #172554 50%,
+            #020617 100%
+        );
 }
 
-/* Dark cinematic overlay */
+
+/* =========================
+   Dark cinematic overlay
+   ========================= */
 
 .container::after {
     content: "";
+
     position: absolute;
     inset: 0;
+
     background:
         linear-gradient(
             90deg,
@@ -69,9 +116,12 @@
             rgba(0, 0, 0, 0.7) 0%,
             transparent 45%
         );
+
     z-index: 3;
+
     pointer-events: none;
 }
+
 
 /* =========================
    Circle
@@ -79,43 +129,65 @@
 
 .circle {
     position: absolute;
+
     top: -320px;
     left: -320px;
+
     width: 640px;
     height: 640px;
+
     border-radius: 50%;
+
     display: grid;
-    overflow: hidden;
     grid-template-columns: 1fr 1fr;
-    animation: rotate 12s infinite;
+
+    overflow: hidden;
+
     z-index: 2;
+
+    /*
+       React controls the rotation.
+       This replaces the old @keyframes animation.
+    */
+
+    transition: transform 0.6s ease;
+
     will-change: transform;
 }
+
 
 .circle div {
     width: 100%;
     height: 100%;
+
     background-size: cover;
     background-position: center;
 }
+
 
 .spiderman {
     background-image: url("../assets/images.jpg");
 }
 
+
 .batman {
-    background-image: url("../assets/batman.jpg");
+    background-image: url("../assets/halk.jpg");
+
     transform: rotate(270deg);
 }
 
+
 .halk {
-    background-image: url("../assets/halk.jpg");
+    background-image: url("../assets/batman.jpg");
+
     transform: rotate(90deg);
 }
+
 
 .thor {
     background-image: url("../assets/thor.jpg");
 }
+
 
 /* =========================
    Character information
@@ -123,18 +195,21 @@
 
 .character-info {
     position: absolute;
+
     z-index: 4;
 
     top: 12%;
     right: 7%;
 
     width: min(500px, 40%);
+
     color: white;
 
     text-align: right;
 
     animation: text-in 0.6s ease;
 }
+
 
 .character-number {
     display: block;
@@ -143,21 +218,26 @@
 
     font-size: 12px;
     font-weight: 700;
+
     letter-spacing: 0.3em;
     text-transform: uppercase;
 
     color: rgba(255, 255, 255, 0.65);
 }
 
+
 .character-name {
     margin: 0;
 
     font-size: clamp(3rem, 7vw, 6rem);
     font-weight: 900;
+
     line-height: 0.85;
     letter-spacing: -0.05em;
+
     text-transform: uppercase;
 }
+
 
 .character-tagline {
     margin: 20px 0 0 auto;
@@ -170,47 +250,10 @@
     color: rgba(255, 255, 255, 0.75);
 }
 
+
 /* =========================
-   Animation
+   Text animation
    ========================= */
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    20% {
-        transform: rotate(0deg);
-    }
-
-    25% {
-        transform: rotate(90deg);
-    }
-
-    45% {
-        transform: rotate(90deg);
-    }
-
-    50% {
-        transform: rotate(180deg);
-    }
-
-    70% {
-        transform: rotate(180deg);
-    }
-
-    75% {
-        transform: rotate(270deg);
-    }
-
-    95% {
-        transform: rotate(270deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 @keyframes text-in {
     from {
@@ -224,6 +267,7 @@
     }
 }
 
+
 /* =========================
    Responsive
    ========================= */
@@ -232,6 +276,7 @@
     .character-info {
         top: 8%;
         right: 6%;
+
         width: 80%;
     }
 
